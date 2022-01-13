@@ -91,9 +91,9 @@ function toDoing(id){
             doneArr[i].description +'</p><hr><p>Deadline: '+
             doneArr[i].deadline+'</p><p>'+
             doneArr[i].date+'</p>'+
-            '<button onclick=toDone('+ doingArr[i].userId +') class="btn btn-warning w-100 mt-3">To Done</button></div>'
+            '<button onclick=toDoing('+ doneArr[i].userId +') class="btn btn-warning w-100 mt-3">To Done</button></div>'
         } else {
-            doingArr.push(doneArr[i]) 
+            doingArr.push(newTask[i]) 
         }
     }
     doneArr = cache
@@ -105,7 +105,19 @@ function toDoing(id){
         doingArr[i].deadline+'</p><p>'+
         doingArr[i].date+'</p>'+
         '<button onclick=toDone('+ doingArr[i].userId +') class="btn btn-warning w-100 mt-3">To Done</button></div>'
+
+        let newTask = {
+            userId: userId,
+            user: user.value,
+            theme: theme.value,
+            description: description.value,
+            deadline: deadline.value,
+            date: date.slice(16,24)
+        }
+        doingArr.push(newTask)
+        userId++
     }
+
 }
 function toCompleted(id){
     let cache = []
@@ -125,7 +137,7 @@ function toCompleted(id){
             doneArr[i].date+'</p>'+
             '<button onclick=toDone('+ doingArr[i].userId +') class="btn btn-warning w-100 mt-3">To Done</button></div>'
         } else {
-            completedArr.push(doneArr[i]) 
+            doneArr.push(completedArr[i]) 
         }
     }
     doneArr = cache
@@ -136,6 +148,8 @@ function toCompleted(id){
         completedArr[i].description +'</p><hr><p>Deadline: '+
         completedArr[i].deadline+'</p><p>'+
         completedArr[i].date+'</p>'
+
+        
     }
 }
 console.log();
