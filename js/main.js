@@ -86,14 +86,15 @@ function toDoing(id){
             cache.push(doneArr[i])
 
             done.innerHTML += '<div class="border mt-3 p-2"><p><b>'+
-            done[i].user.toUpperCase() +'</b></p><hr><p><b>'+
+            doneArr[i].user.toUpperCase() +'</b></p><hr><p><b>'+
             doneArr[i].theme+'</b></p><p>'+
             doneArr[i].description +'</p><hr><p>Deadline: '+
             doneArr[i].deadline+'</p><p>'+
             doneArr[i].date+'</p>'+
-            '<button onclick=toDoing('+ doneArr[i].userId +') class="btn btn-warning w-100 mt-3">To Done</button></div>'
+            '<button onclick=toDoing('+ doneArr[i].userId +') class="btn btn-danger w-100 mt-3">To Doing</button>'+
+        '<button onclick=toCompleted('+ doneArr[i].userId +') class="btn btn-success w-100 mt-3">To Completed</button>'+'</div>'
         } else {
-            doingArr.push(newTask[i]) 
+            doingArr.push(doneArr[i]) 
         }
     }
     doneArr = cache
@@ -106,16 +107,7 @@ function toDoing(id){
         doingArr[i].date+'</p>'+
         '<button onclick=toDone('+ doingArr[i].userId +') class="btn btn-warning w-100 mt-3">To Done</button></div>'
 
-        let newTask = {
-            userId: userId,
-            user: user.value,
-            theme: theme.value,
-            description: description.value,
-            deadline: deadline.value,
-            date: date.slice(16,24)
-        }
-        doingArr.push(newTask)
-        userId++
+
     }
 
 }
@@ -130,14 +122,15 @@ function toCompleted(id){
             cache.push(doneArr[i])
 
             done.innerHTML += '<div class="border mt-3 p-2"><p><b>'+
-            done[i].user.toUpperCase() +'</b></p><hr><p><b>'+
+            doneArr[i].user.toUpperCase() +'</b></p><hr><p><b>'+
             doneArr[i].theme+'</b></p><p>'+
             doneArr[i].description +'</p><hr><p>Deadline: '+
             doneArr[i].deadline+'</p><p>'+
             doneArr[i].date+'</p>'+
-            '<button onclick=toDone('+ doingArr[i].userId +') class="btn btn-warning w-100 mt-3">To Done</button></div>'
+            '<button onclick=toDoing('+ doneArr[i].userId +') class="btn btn-danger w-100 mt-3">To Doing</button>'+
+            '<button onclick=toCompleted('+ doneArr[i].userId +') class="btn btn-success w-100 mt-3">To Completed</button>'+'</div>'
         } else {
-            doneArr.push(completedArr[i]) 
+            completedArr.push(doneArr[i]) 
         }
     }
     doneArr = cache
@@ -152,4 +145,4 @@ function toCompleted(id){
         
     }
 }
-console.log();
+
